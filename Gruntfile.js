@@ -545,9 +545,8 @@ grunt.initConfig({
         commit: true,
         push: true,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
-        remote: 'http://github.com/Stashtronauts/pillowfight.git',
+        remote: 'origin',
         branch: 'heroku',
-        remoteBranch:'production',
         tag: pkg.version
       }
     },

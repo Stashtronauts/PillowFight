@@ -21,8 +21,11 @@ PillowFight.Game.prototype = {
       Current = new Phaser.Game(width, height, Phaser.AUTO, 'PillowFight');
 
       // Add states
-      Current.state.add("preload");
-      Current.state.add("play", PillowFight.Play);
+      Current.state.add("Boot", PillowFight.Boot);
+      Current.state.add("Loading", PillowFight.Loading);
+      Current.state.add("Play", PillowFight.Play);
+
+      Current.state.start("Boot");
   }
 
 };

@@ -545,8 +545,8 @@ grunt.initConfig({
         commit: true,
         push: true,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
-        remote: 'origin',
-        branch: 'heroku',
+        remote: 'heroku',
+        branch: 'master',
         tag: pkg.version
       }
     },

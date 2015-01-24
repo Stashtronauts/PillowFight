@@ -6,14 +6,17 @@ var PillowFight = PillowFight || {};
 PillowFight.PlayerState = { IDLE:0, HOSTING: 1, JOINING: 2, ACTIVE: 3 };
 
 PillowFight.Player = function(){
-  PillowFight.Game.Current.input.keyboard.addCallbacks();
+  this.game = PillowFight.Game;
+
+  this.game.Current.input.keyboard.addCallbacks();
 };
 
 PillowFight.Player.prototype = {
   id: 0,
   items: [],
   name: "",
-  state: PlayerState.IDLE,
+  state: PillowFight.PlayerState.IDLE,
+  cursors: this.game.input.keyboard.createCursorKeys(), // These represent an object containing the up, down, left, and right cursors
 
   onKeyDown: function(){
     // make some poops :)

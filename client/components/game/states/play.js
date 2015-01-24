@@ -4,7 +4,6 @@
 var PillowFight = PillowFight || {};
 
 PillowFight.Play = function(){
-  this.gameRef = PillowFight.Game.Current || {};
 
 };
 
@@ -25,7 +24,7 @@ PillowFight.Play.prototype = {
     this.phaserRef.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Initialize player
-    this.addPlayer(new PillowFight.Player());
+    PillowFight.addPlayer(new PillowFight.Player());
   },
 
   // Main game loop

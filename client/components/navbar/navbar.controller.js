@@ -7,6 +7,29 @@ angular.module('pillowfightApp')
       'link': '/'
     }];
 
+    var routes = {
+      authorized:[{
+        'title': 'Lobby',
+        'link': '/lobby'
+      }
+      ]
+      ,
+      admin:[{
+        'title': 'Admin',
+        'link': '/admin'
+      },
+        {
+          'title': 'Game',
+          'link': '/game'
+        }]
+    };
+
+    $scope.routes=function(){
+      return $scope.menu.
+                    concat($scope.isLoggedIn()?routes.authorized:[]).
+                    concat($scope.isAdmin()?routes.admin:[]);
+    }
+
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;

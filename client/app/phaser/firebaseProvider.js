@@ -1,8 +1,8 @@
 /**
  * Created by Memoria on 1/23/15.
  */
-var Firebase = require('firebase');
+var PillowFight = PillowFight || {};
 
-var FirebaseProvider = module.exports = function(){
+PillowFight.FirebaseProvider = function(){
     return new Firebase("https://stashtronauts.firebaseio.com/");
 };

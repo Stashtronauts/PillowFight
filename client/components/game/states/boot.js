@@ -7,9 +7,7 @@ PillowFight.Boot = function(){
   this.teamText = "";
 };
 
-PillowFight.Boot.prototype = {
-  create: function(){
-
+PillowFight.Boot.prototype.create = function() {
     this.phaserRef.stage.backgroundColor = '#D46A6A';
 
     //scaling options
@@ -22,25 +20,24 @@ PillowFight.Boot.prototype = {
     //screen size will be set automatically
     this.phaserRef.scale.setScreenSize(true);
     this.phaserRef.time.events.add(3000, this.onEndBoot, this);
-  },
+};
 
-  preload: function(){
+PillowFight.Boot.prototype.preload = function() {
     this.phaserRef = PillowFight.Game.Current || {};
     this.teamText = this.phaserRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2,
                                         'Stashtronaut Studios', { font: "20px Arial", fill: "#ffffff",
                                         align: "center" });
     this.teamText.anchor.setTo(0.5, 0.5);
-  },
+};
 
-  update: function(){
+PillowFight.Boot.prototype.update = function() {
 
-  },
+};
 
-  render: function(){
+PillowFight.Boot.prototype.render = function() {
 
-  },
+};
 
-  onEndBoot: function(){
+PillowFight.Boot.prototype.onEndBoot = function() {
     this.phaserRef.state.start("Play");
-  }
 };

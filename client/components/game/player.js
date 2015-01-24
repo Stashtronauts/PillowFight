@@ -1,56 +1,53 @@
 /**
-* Created by Memoria on 1/23/15.
+* Created by wfallows on 1/23/15.
 */
 var PillowFight = PillowFight || {};
 
 PillowFight.Player = function(){
   this.phaserRef = PillowFight.Game.Current;
+  this.id = 0;
+  this.items = [];
+  this.name = "";
+  this.effects = [];
+  this.inputController = {};
+
   this.initialize();
 };
 
-PillowFight.Player.prototype = {
-  id: 0,
-  items: [],
-  name: "",
-  effects: [],
-  //sprite: new
-  //inputController: InputController
-
-  initialize: function(){
+PillowFight.Player.prototype.initialize = function(){
     this.inputController = new PillowFight.PlayerInputController();
     this.sprite = new Phaser.Sprite(this.phaserRef, 0, 0, "player");
     this.sprite.anchor.setTo(0.5, 0.5);
-  },
+};
 
-  addItem: function(itemToAdd){
-    if (this.items.indexOf(effectToAdd) == -1) {
-      this.items.push(effectToAdd);
+PillowFight.Player.prototype.addItem = function(itemToAdd){
+    if (this.items.indexOf(itemToAdd) == -1) {
+      this.items.push(itemToAdd);
     }
-  },
+};
 
-  addEffect: function (effectToAdd) {
+PillowFight.Player.prototype.addEffect = function (effectToAdd) {
     if (this.effects.indexOf(effectToAdd) == -1) {
       this.effects.push(effectToAdd);
     }
-  },
+};
 
-  removeItem: function(itemToRemove) {
+PillowFight.Player.prototype.removeItem = function(itemToRemove) {
+    if (this.effects.indexOf(itemToRemove) != -1) {
+      this.effects.splice(index, 1);
+    }
+};
+
+PillowFight.Player.prototype.removeEffect =  function (removedEffect) {
     if (this.effects.indexOf(removedEffect) != -1) {
       this.effects.splice(index, 1);
     }
-  },
+};
 
-  removeEffect: function (removedEffect) {
-    if (this.effects.indexOf(removedEffect) != -1) {
-      this.effects.splice(index, 1);
-    }
-  },
-
-  preload: function(){
+PillowFight.Player.prototype.preload = function(){
     this.phaserRef.load.image('player', 'assets/cat.png')
-  },
+};
 
-  update: function(){
-    inputController.update();
-  }
+PillowFight.Player.prototype.update = function(){
+    this.inputController.update();
 };

@@ -7,9 +7,6 @@ PillowFight.PlayerInputController = function(){
 
 };
 
-PillowFight.PlayerInputController.prototype = {
-
-  update: function(){
-    console.log("input controller is updating!");
-  }
+PillowFight.PlayerInputController.prototype.update = function(){
+    //console.log("input controller is updating!");
 };

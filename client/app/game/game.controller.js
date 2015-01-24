@@ -3,5 +3,5 @@
 angular.module('pillowfightApp')
   .controller('GameCtrl', function ($scope,$window) {
     $scope.message = 'Hello';
-    $scope.game = $window.pillowFight;
+    $scope.game = $window.pfGame;
   });

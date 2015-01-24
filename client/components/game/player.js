@@ -6,9 +6,9 @@ var PillowFight = PillowFight || {};
 PillowFight.PlayerState = { IDLE:0, HOSTING: 1, JOINING: 2, ACTIVE: 3 };
 
 PillowFight.Player = function(){
-  this.game = PillowFight.Game;
+  this.gameRef = PillowFight.Game.Current;
 
-  this.game.Current.input.keyboard.addCallbacks();
+  this.gameRef.input.keyboard.addCallbacks();
 };
 
 PillowFight.Player.prototype = {

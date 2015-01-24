@@ -3,18 +3,19 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Loading = function(){};
+PillowFight.Loading = function(){
+
+};
 
 PillowFight.Loading.prototype = {
-  // Handle any pre-render logic here
-  preload: function () {
+    // Handle any pre-render logic here
+    preload: function () {
     this.Current.add.text(680, 550, 'I am a loading screen.', { font: "20px Arial", fill: "#ffffff", align: "center" });
-    //this.Current.add.
+
   },
 
   create: function () {
-    // Init physics
-    this.Game.physics.startSystem(Phaser.Physics.ARCADE);
+
   },
 
   // Main game loop

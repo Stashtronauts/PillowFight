@@ -3,18 +3,21 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Play = function(){};
+PillowFight.Play = function(){
+  this.gameRef = PillowFight.Game.Current || {};
+
+};
 
 PillowFight.Play.prototype = {
 
   // Handle any pre-render logic here
   preload: function () {
-    this.Current.add.text(680, 550, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.gameRef.add.text(680, 550, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
   },
 
   create: function () {
     // Init physics
-    this.Game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.gameRef.physics.startSystem(Phaser.Physics.ARCADE);
   },
 
   // Main game loop

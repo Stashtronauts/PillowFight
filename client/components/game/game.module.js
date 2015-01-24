@@ -3,5 +3,5 @@
  */
 angular.module('pillowfightApp')
   .service('pfGame', function () {
-    return PillowFight.Game.initalize;
+    return PillowFight;
 });

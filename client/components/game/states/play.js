@@ -12,12 +12,13 @@ PillowFight.Play.prototype = {
 
   // Handle any pre-render logic here
   preload: function () {
-    this.gameRef.add.text(680, 550, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.phaserRef = PillowFight.Game.Current || {};
+    this.phaserRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
   },
 
   create: function () {
     // Init physics
-    this.gameRef.physics.startSystem(Phaser.Physics.ARCADE);
+    this.phaserRef.physics.startSystem(Phaser.Physics.ARCADE);
   },
 
   // Main game loop

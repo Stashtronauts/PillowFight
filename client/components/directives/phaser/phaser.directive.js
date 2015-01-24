@@ -7,12 +7,12 @@ angular.module('pillowfightApp')
       restrict: 'EA',
       scope:{
         gameModel:'=',
-        game:'&'
+        game:'='
       },
       controller:function($scope){
-        console.log("boop");
-        $scope.gameInstance = $scope.game();
+        //console.log("boop");
+        $scope.gameInstance = new $scope.game.Game();
+        $scope.gameInstance.initialize();
       }
-
     };
   });

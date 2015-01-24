@@ -3,22 +3,24 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Game = function(){};
+PillowFight.Game = function(){
+  // Constants
+  this.DEFAULT_GAME_WIDTH = 800;
+  this.DEFAULT_GAME_HEIGHT = 600;
+};
+
+PillowFight.Game.Current = {};
+PillowFight.Game.Width;
+PillowFight.Game.Height;
 
 PillowFight.Game.prototype = {
 
-  // Constants
-  DEFAULT_GAME_WIDTH: 800,
-  DEFAULT_GAME_HEIGHT: 600,
-
-  Current: {},
-
   initialize: function(gameWidth, gameHeight) {
       // Init game
-      this.width = gameWidth || DEFAULT_GAME_WIDTH;
-      this.height = gameHeight || DEFAULT_GAME_HEIGHT;
+      var width = gameWidth || this.DEFAULT_GAME_WIDTH;
+      var height = gameHeight || this.DEFAULT_GAME_HEIGHT;
 
-      Current = new Phaser.Game(width, height, Phaser.AUTO, 'PillowFight', {
+      var phaserGame = new Phaser.Game(width, height, Phaser.AUTO, 'PillowFight', {
         preload: this.onPreload,
         create: this.onCreate,
         update: this.onUpdate,
@@ -26,11 +28,15 @@ PillowFight.Game.prototype = {
       });
 
       // Add states
-      Current.state.add("Boot", PillowFight.Boot);
-      Current.state.add("Loading", PillowFight.Loading);
-      Current.state.add("Play", PillowFight.Play);
+      phaserGame.state.add("Boot", PillowFight.Boot);
+      phaserGame.state.add("Load", PillowFight.Loading);
+      phaserGame.state.add("Play", PillowFight.Play);
 
-      Current.state.start("Boot");
+      phaserGame.state.start("Boot");
+
+      PillowFight.Game.Current = phaserGame;
+      PillowFight.Game.Width = width;
+      PillowFight.Game.Height = height;
       // Init login
 
       // Initialize player
@@ -40,7 +46,7 @@ PillowFight.Game.prototype = {
 
   // Handle any pre-render logic here
   onPreload: function () {
-    this.Current.add.text(680, 550, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.Current.add.text(680, 550, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#fff", align: "center" });
   },
 
   onCreate: function () {

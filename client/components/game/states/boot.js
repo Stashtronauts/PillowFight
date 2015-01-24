@@ -4,13 +4,13 @@
 var PillowFight = PillowFight || {};
 
 PillowFight.Boot = function(){
-  this.gameRef = PillowFight.Game.Current;
+
 };
 
 PillowFight.Boot.prototype = {
   create: function(){
     //loading screen will have a white background
-    this.gameRef.stage.backgroundColor = '#ff33bf';
+    this.phaserRef.stage.backgroundColor = '#ff33bf';
 
     //scaling options
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -22,14 +22,11 @@ PillowFight.Boot.prototype = {
     //screen size will be set automatically
     this.scale.setScreenSize(true);
 
-    //maybe start physics system?
-    //this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
     this.state.start('Load');
   },
 
   preload: function(){
-
+    this.phaserRef = PillowFight.Game.Current || {};
   },
 
   update: function(){

@@ -5,4 +5,10 @@ node_js:
 before_script:
   - npm install -g bower grunt-cli
   - bower install
+after_success:
+  - grunt
+  - grunt buildcontrol:heroku
+after_failure:
+after_script:
 services: mongodb
+

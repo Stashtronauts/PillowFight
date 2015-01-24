@@ -4,10 +4,15 @@ node_js:
   - '0.11'
 before_script:
   - npm install -g bower grunt-cli
+  - npm install --save-dev
   - bower install
-after_success:
+  - grunt version:patch
+  - git add .
+  - grunt buildcontrol:version
+script:
   - grunt
-  - grunt buildcontrol:heroku
+after_success:
+  - grunt deploy
 after_failure:
 after_script:
 services: mongodb

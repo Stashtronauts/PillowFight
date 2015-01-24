@@ -8,7 +8,6 @@ module.exports = function (grunt) {
     localConfig = {};
   }
 
-  var pkg = require('./package.json');
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
@@ -539,6 +538,17 @@ grunt.initConfig({
     }
   },
   buildcontrol: {
+    version:{
+      options:{
+        dir:'./',
+        commit: true,
+        push: true,
+        message: 'Versioning from commit %sourceCommit% on branch %sourceBranch%',
+        remote: 'origin',
+        branch: 'master',
+        tag: require('./package.json').version
+      }
+    },
     heroku: {
       options: {
         dir: 'dist',
@@ -547,9 +557,28 @@ grunt.initConfig({
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
         remote: 'heroku',
         branch: 'master',
-        tag: pkg.version
+        tag: require('./package.json').version
       }
     },
+  },
+  semver: {
+    options: {
+      // Task-specific options go here.
+      space: "\t"
+    },
+    app: {
+      // Target-specific file lists and/or options go here.
+      files: [
+        {
+          src: "package.json",
+          dest: "package.json"
+        },
+        {
+          src: "bower.json",
+          dest: "bower.json"
+        }
+      ]
+    }
   }
 });
 
@@ -674,5 +703,26 @@ grunt.registerTask('default', [
   'build'
 ]);
 
-grunt.registerTask('deploy',['buildcontrol:heroku'])
+grunt.registerTask('version',function(target){
+  var tasks = [];
+  if(target === "patch") {
+    tasks.push('semver:app:bump:patch')
+  }
+  if(target === "minor") {
+    tasks.push('semver:app:bump:minor')
+  }
+  if(target === "major") {
+    tasks.push('semver:app:bump:major')
+  }
+  tasks.push('buildcontrol:version');
+  return grunt.task.run(tasks);
+});
+
+grunt.registerTask('deploy',function(target) {
+
+    tasks.push('build');
+    tasks.push('buildcontrol:heroku')
+    return grunt.task.run(tasks);
+  });
+
 };

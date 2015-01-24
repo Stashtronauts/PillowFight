@@ -8,3 +8,4 @@ dist
 /server/config/local.env.js
 .idea
 .data/
+node_modules/

@@ -5,6 +5,10 @@ angular.module('pillowfightApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }
+    ,{
+      'title': 'Game',
+      'link': '/game'
     }];
 
     var routes = {

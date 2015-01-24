@@ -3,13 +3,14 @@
 angular.module('pillowfightApp')
   .directive('pfPhaser', function () {
     return {
-      templateUrl: 'app/directives/phaser/phaser.html',
+      templateUrl: 'components/directives/phaser/phaser.html',
       restrict: 'EA',
       scope:{
-        gameModel:'='
+        gameModel:'=',
+        gameId:'='
       },
       controller:function($scope){
-
+        console.log("boop");
       }
 
     };

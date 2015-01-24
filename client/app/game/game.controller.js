@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pillowfightApp')
-  .controller('GameCtrl', function ($scope,$window) {
+  .controller('GameCtrl', function ($scope,pfGame) {
     $scope.message = 'Hello';
-    $scope.game = $window.pfGame;
+    $scope.gameId = 'PillowFight'
+    $scope.gameModel = pfGame();
   });

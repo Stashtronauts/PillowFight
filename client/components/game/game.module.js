@@ -3,6 +3,5 @@
  */
 angular.module('pillowfightApp')
   .service('pfGame', function () {
-    PillowFight.Game.initialize();
-    return  PillowFight.Game.Current;
+    return PillowFight.Game.initalize
 });

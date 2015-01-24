@@ -4,6 +4,7 @@
 var PillowFight = PillowFight || {};
 
 PillowFight.Loading = function(){
+  this.gameRef = PillowFight.Game.Current || {};
 
 };
 
@@ -15,7 +16,7 @@ PillowFight.Loading.prototype = {
   },
 
   create: function () {
-
+    this.gameRef.state.start("Play");
   },
 
   // Main game loop

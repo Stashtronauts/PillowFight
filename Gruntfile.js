@@ -544,7 +544,7 @@ grunt.initConfig({
         commit: true,
         push: true,
         message: 'Versioning from commit %sourceCommit% on branch %sourceBranch%',
-        remote: 'origin',
+        remote: 'git@github.com:Stashtronauts/PillowFight.git',
         branch: 'master',
         tag: require('./package.json').version
       }

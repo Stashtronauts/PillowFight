@@ -9,7 +9,7 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/pfLobbys', require('./api/pfLobby'));
+  app.use('/api/lobbys', require('./api/lobby'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));

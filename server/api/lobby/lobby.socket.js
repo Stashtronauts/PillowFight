@@ -38,7 +38,7 @@ exports.register = function(socket) {
   });
   
   socket.on('chatToServer', function(data) {
-    socket.emit('chatToClient' function(data) {
+    socket.emit('chatToClient', function(data) {
     
     });
   });

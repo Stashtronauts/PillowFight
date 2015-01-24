@@ -4,8 +4,8 @@
 
 'use strict';
 
-var PfLobby = require('./pfLobby.model');
-
+var Lobby = require('./lobby.model.js');
+var dal = require('./lobby.dal.js');
 exports.register = function(socket) {
   PfLobby.schema.post('save', function (doc) {
     onSave(socket, doc);

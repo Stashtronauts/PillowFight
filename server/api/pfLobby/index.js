@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./pfLobby.controller');
+var controller = require('./lobby.controller.js');
 
 var router = express.Router();
 

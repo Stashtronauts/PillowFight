@@ -18,7 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/pfLobby/pfLobby.socket').register(socket);
+  require('../api/pfLobby/lobby.socket.js').register(socket);
   //require('../api/thing/thing.socket').register(socket);
 }
 

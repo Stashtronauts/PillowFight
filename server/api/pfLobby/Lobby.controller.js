@@ -1,28 +1,34 @@
 'use strict';
 
 var _ = require('lodash');
-var PfLobby = require('./pfLobby.model');
-
+var Lobby = require('./lobby.model.js');
+var dal = require('./lobby.dal.js');
 // Get list of pfLobbys
 exports.index = function(req, res) {
-  PfLobby.find(function (err, pfLobbys) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, pfLobbys);
+  dal.findAll({},function(err,lobby){
+    if(err){
+      return handleError(res,err);
+    }
+    return res.json(200, lobby);
   });
 };
 
 // Get a single pfLobby
 exports.show = function(req, res) {
-  PfLobby.findById(req.params.id, function (err, pfLobby) {
-    if(err) { return handleError(res, err); }
-    if(!pfLobby) { return res.send(404); }
-    return res.json(pfLobby);
+  dal.findById(req.params.id, function (err,lobby) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!pfLobby) {
+      return res.send(404);
+    }
+    return res.json(200, lobby);
   });
 };
 
 // Creates a new pfLobby in the DB.
 exports.create = function(req, res) {
-  PfLobby.create(req.body, function(err, pfLobby) {
+  dal.create(req.body, function(err, pfLobby) {
     if(err) { return handleError(res, err); }
     return res.json(201, pfLobby);
   });
@@ -31,14 +37,10 @@ exports.create = function(req, res) {
 // Updates an existing pfLobby in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  PfLobby.findById(req.params.id, function (err, pfLobby) {
+  dal.update(req.params.id,req.body, function (err, lobby) {
     if (err) { return handleError(res, err); }
-    if(!pfLobby) { return res.send(404); }
-    var updated = _.merge(pfLobby, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, pfLobby);
-    });
+    if(!lobby) { return res.send(404); }
+    return res.json(200, lobby);
   });
 };
 

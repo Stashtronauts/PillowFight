@@ -8,7 +8,6 @@ module.exports = function (grunt) {
     localConfig = {};
   }
 
-  var pkg = require('./package.json');
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
@@ -539,17 +538,47 @@ grunt.initConfig({
     }
   },
   buildcontrol: {
-    heroku: {
+    app:{
+      options:{
+        dir:'./',
+        commit: true,
+        push: true,
+        message: 'Versioning from commit %sourceCommit% on branch %sourceBranch%',
+        remote: 'git@github.com:Stashtronauts/PillowFight.git',
+        branch: 'master',
+        tag: require('./package.json').version
+      }
+    },
+    dist: {
       options: {
         dir: 'dist',
         commit: true,
         push: true,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
-        remote: 'heroku',
+        remote: 'git@heroku.com:pillow-fight.git',
         branch: 'master',
-        tag: pkg.version
+        tag: require('./package.json').version
       }
     },
+  },
+  semver: {
+    options: {
+      // Task-specific options go here.
+      space: "\t"
+    },
+    app: {
+      // Target-specific file lists and/or options go here.
+      files: [
+        {
+          src: "package.json",
+          dest: "package.json"
+        },
+        {
+          src: "bower.json",
+          dest: "bower.json"
+        }
+      ]
+    }
   }
 });
 
@@ -674,5 +703,52 @@ grunt.registerTask('default', [
   'build'
 ]);
 
-grunt.registerTask('deploy',['buildcontrol:heroku'])
+grunt.registerTask('version',function(target){
+  var tasks = [];
+  if(target === "patch") {
+    tasks.push('semver:app:bump:patch')
+  }
+  if(target === "minor") {
+    tasks.push('semver:app:bump:minor')
+  }
+  if(target === "major") {
+    tasks.push('semver:app:bump:major')
+  }
+  return grunt.task.run(tasks);
+});
+
+grunt.registerTask('deploy',function(target) {
+
+    var tasks = [
+      'version:'+target,
+      'build',
+      'add',
+      'buildcontrol:app',
+      'buildcontrol:dist'
+    ]
+    return grunt.task.run(tasks);
+  });
+
+  grunt.registerTask('add',function(){
+    var defer = this.async();
+    var projectOptions ={
+      cmd:"git",
+      args:['add','.']
+    }
+    var distOption={
+      cmd:"git",
+      args:['add','.']
+    }
+    grunt.util.spawn(projectOptions,function(error, result, code){
+      console.log(error, result, code);
+      grunt.util.spawn(distOption,function(error, result, code){
+        console.log(error, result, code);
+        defer(result);
+      });
+    });
+
+    return defer;
+  });
 };
+
+

@@ -538,7 +538,7 @@ grunt.initConfig({
     }
   },
   buildcontrol: {
-    version:{
+    app:{
       options:{
         dir:'./',
         commit: true,
@@ -549,13 +549,13 @@ grunt.initConfig({
         tag: require('./package.json').version
       }
     },
-    heroku: {
+    dist: {
       options: {
         dir: 'dist',
         commit: true,
         push: true,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
-        remote: 'heroku',
+        remote: 'git@heroku.com:pillow-fight.git',
         branch: 'master',
         tag: require('./package.json').version
       }
@@ -714,15 +714,41 @@ grunt.registerTask('version',function(target){
   if(target === "major") {
     tasks.push('semver:app:bump:major')
   }
-  tasks.push('buildcontrol:version');
   return grunt.task.run(tasks);
 });
 
 grunt.registerTask('deploy',function(target) {
 
-    tasks.push('build');
-    tasks.push('buildcontrol:heroku')
+    var tasks = [
+      'version:'+target,
+      'build',
+      'add',
+      'buildcontrol:app',
+      'buildcontrol:dist'
+    ]
     return grunt.task.run(tasks);
   });
 
+  grunt.registerTask('add',function(){
+    var defer = this.async();
+    var projectOptions ={
+      cmd:"git",
+      args:['add','.']
+    }
+    var distOption={
+      cmd:"git",
+      args:['add','.']
+    }
+    grunt.util.spawn(projectOptions,function(error, result, code){
+      console.log(error, result, code);
+      grunt.util.spawn(distOption,function(error, result, code){
+        console.log(error, result, code);
+        defer(result);
+      });
+    });
+
+    return defer;
+  });
 };
+
+

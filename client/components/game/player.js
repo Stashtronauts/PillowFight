@@ -2,9 +2,10 @@
 * Created by wfallows on 1/23/15.
 */
 var PillowFight = PillowFight || {};
+PillowFight.Game = PillowFight.Game ||{};
 
-PillowFight.Player = function(){
-  this.phaserRef = PillowFight.Game.Current;
+PillowFight.Game.Player = function(game){
+  this.game = game;
   this.id = 0;
   this.items = [];
   this.name = "";
@@ -12,6 +13,7 @@ PillowFight.Player = function(){
   this.inputController = {};
 
   this.initialize();
+  return this;
 };
 
 PillowFight.Player.prototype.initialize = function(){

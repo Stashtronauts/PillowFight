@@ -3,8 +3,10 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Boot = function(){
+PillowFight.Boot = function(game){
   this.teamText = "";
+  this.game = game;
+  return this;
 };
 
 PillowFight.Boot.prototype.create = function() {

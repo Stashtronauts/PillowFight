@@ -3,8 +3,9 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Play = function(){
-
+PillowFight.Play = function(game){
+  this.game = game;
+  return this;
 };
 
 PillowFight.Play.prototype.preload = function () {
@@ -15,7 +16,7 @@ PillowFight.Play.prototype.preload = function () {
     this.phaserRef.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Initialize player
-    PillowFight.Game.AddPlayer(new PillowFight.Player());
+    game.AddPlayer(new game.Player());
 
     _.each(PillowFight.Game.Players, function(player){
       player.preload();

@@ -5,26 +5,24 @@ var PillowFight = PillowFight || {};
 
 PillowFight.GameState = { INACTIVE: 0, READY: 1, ACTIVE: 2, PAUSED: 3, COMPLETE: 4};
 
-PillowFight.Game = function(gameWidth, gameHeight){
+PillowFight.Game = function(gameWidth, gameHeight, container){
   // Constants
-  this.DEFAULT_GAME_WIDTH = 800;
-  this.DEFAULT_GAME_HEIGHT = 600;
+  var DEFAULT_GAME_WIDTH = 800;
+  var DEFAULT_GAME_HEIGHT = 600;
 
-  var width = gameWidth || this.DEFAULT_GAME_WIDTH;
-  var height = gameHeight || this.DEFAULT_GAME_HEIGHT;
+  this.width = gameWidth || DEFAULT_GAME_WIDTH;
+  this.height = gameHeight || DEFAULT_GAME_HEIGHT;
 
-  var phaserGame = new Phaser.Game(width, height, Phaser.AUTO, 'PillowFight');
-
-  PillowFight.Game.Current = phaserGame;
-  PillowFight.Game.Width = width;
-  PillowFight.Game.Height = height;
+  this.phaserGame = new Phaser.Game(this.width, this.height, Phaser.AUTO, container);
 
   // Add states
-  phaserGame.state.add("Boot", PillowFight.Boot);
-  phaserGame.state.add("Load", PillowFight.Loading);
-  phaserGame.state.add("Play", PillowFight.Play);
+  phaserGame.state.add("Boot", new PillowFight.Boot(this));
+  phaserGame.state.add("Load", new PillowFight.Loading(this));
+  phaserGame.state.add("Play", new PillowFight.Play(this));
 
   phaserGame.state.start("Boot");
+
+  return this;
 };
 
 PillowFight.Game.Current = {};

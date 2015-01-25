@@ -4,7 +4,7 @@ angular.module('pillowfightApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('game', {
-        url: '/game',
+        url: '/game/:id',
         templateUrl: 'app/game/game.html',
         controller: 'GameCtrl'
       });

@@ -16,7 +16,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol:'grunt-build-control'
+    buildcontrol:'grunt-build-control',
+    svg2png:'grunt-svg2png'
   });
 
 // Time how long tasks take. Can help when optimizing build times
@@ -577,6 +578,15 @@ grunt.initConfig({
           src: "bower.json",
           dest: "bower.json"
         }
+      ]
+    }
+  },
+  svg2png:{
+    all: {
+      // specify files in array format with multiple src-dest mapping
+      files: [
+        // rasterize all SVG files in "img" and its subdirectories to "img/png"
+        { src: ['client/**/*.svg']},
       ]
     }
   }

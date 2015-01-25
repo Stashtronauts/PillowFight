@@ -18,6 +18,11 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/room/room.socket').register(socket);
+  require('../api/entity/entity.socket').register(socket);
+  require('../api/asset/asset.socket').register(socket);
+  require('../api/scene/scene.socket').register(socket);
+  require('../api/game/game.socket').register(socket);
   require('../api/lobby/lobby.socket.js').register(socket);
   //require('../api/thing/thing.socket').register(socket);
 }

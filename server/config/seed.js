@@ -6,7 +6,9 @@
 'use strict';
 
 var User = require('../api/user/user.model');
-
+var Game = require('../api/game/game.model');
+var mongoose = require('mongoose');
+var House = mongoose.model('House');
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
@@ -23,4 +25,40 @@ User.find({}).remove(function() {
       console.log('finished populating users');
     }
   );
+});
+
+Game.find({}).remove(function(){
+  Game.create({
+    name:'test',
+    players:['testadmin'],
+    house:{
+      rooms:[{
+        name:'Test Room',
+        scene:{
+          assets:[{
+            type:'image',
+            key:'player',
+            url:'/assets/images/cat.jpg'
+          }],
+          layout:[{
+            components:[{
+              type:'transform',
+              value:{
+                x:0,
+                y:0
+              }
+            },
+            {
+              type:'sprite',
+              value:{
+                key:'player'
+              }
+            }]
+          }]
+        }
+      }]
+    }
+  },function(e){
+    console.log(e,'created game');
+  })
 });

@@ -15,6 +15,7 @@ PillowFight.Play.prototype.preload = function () {
 
     // Init physics
     this.phRef.physics.startSystem(Phaser.Physics.ARCADE);
+    this.phRef.load.image('player', '/assets/images/corgi.jpg');
 
     // Initialize player
     this.gameWrapper.AddPlayer(new PillowFight.Game.Player(this.gameWrapper));
@@ -25,6 +26,7 @@ PillowFight.Play.prototype.preload = function () {
 };
 
 PillowFight.Play.prototype.create = function () {
+  this.phRef.add.sprite(0, 0, 'player');
 
 };
 

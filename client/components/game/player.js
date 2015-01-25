@@ -43,10 +43,8 @@ Game.Player.prototype.removeEffect =  function (removedEffect) {
 };
 
 Game.Player.prototype.preload = function(){
-    this.phRef.load.image('player', '/client/assets/images/yeoman.png');
     //this.sprite.anchor.setTo(0.5, 0.5);
 
-    this.phRef.add.sprite(0, 0, 'player');
 };
 
 Game.Player.prototype.update = function(){

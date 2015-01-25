@@ -4,11 +4,13 @@
 var PillowFight = PillowFight || {};
 var Game = PillowFight.Game || {};
 
-Game.PlayerInputController = function(){
+Game.PlayerInputController = function(gameWrapper){
+  this.gameWrapper = gameWrapper;
+  this.game = this.gameWrapper.phaserGame || {};
 
   return this;
 };
 
 Game.PlayerInputController.prototype.update = function(){
-    //console.log("input controller is updating!");
+
 };

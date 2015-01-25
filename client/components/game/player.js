@@ -6,13 +6,15 @@ var Game = PillowFight.Game ||{};
 
 Game.Player = function(gameWrapper){
   this.gameWrapper = gameWrapper || {};
-  this.phGame = this.gameWrapper.phaserGame || {};
+  this.game = this.gameWrapper.phaserGame || {};
 
   this.id = 0;
   this.items = [];
   this.name = "";
   this.effects = [];
   this.inputController = {};
+
+  this.isAlive = true;
 
   this.inputController = new Game.PlayerInputController();
   return this;
@@ -43,12 +45,14 @@ Game.Player.prototype.removeEffect =  function (removedEffect) {
 };
 
 Game.Player.prototype.preload = function(){
-  this.phGame.load.image('player', '/client/assets/images/cat.png');
+  this.game.load.image('player', '/client/assets/images/cat.png');
 };
 
 Game.Player.prototype.create = function(){
-    this.sprite = this.phGame.add.sprite(0, 0, 'player');
+    this.sprite = this.game.add.sprite(0, 0, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
+
+    this.game.camera.follow(this);
 };
 
 Game.Player.prototype.update = function(){
@@ -57,4 +61,8 @@ Game.Player.prototype.update = function(){
 
 Game.Player.prototype.render = function(){
 
+};
+
+Game.Player.prototype.die = function(){
+  this.isAlive = false;
 };

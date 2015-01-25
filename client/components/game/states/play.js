@@ -3,38 +3,41 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Play = function(game){
-  this.game = game;
+PillowFight.Play = function(gameWrapper){
+  this.gameWrapper = gameWrapper || {};
   return this;
 };
 
 PillowFight.Play.prototype.preload = function () {
-    this.phaserRef = PillowFight.Game.Current || {};
-    this.phaserRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.game.add.text(this.gameWrapper.width/2, this.gameWrapper.height/2, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
 
     // Init physics
-    this.phaserRef.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Initialize player
-    game.AddPlayer(new game.Player());
+    this.gameWrapper.AddPlayer(new PillowFight.Game.Player(this.gameWrapper));
 
-    _.each(PillowFight.Game.Players, function(player){
+    _.each(this.gameWrapper.players, function(player){
       player.preload();
     });
 };
 
 PillowFight.Play.prototype.create = function () {
-
+  _.each(this.gameWrapper.players, function(player){
+    player.create();
+  });
 };
 
   // Main game loop
 PillowFight.Play.prototype.update = function () {
-  _.each(PillowFight.Game.Players, function(player){
+  _.each(this.gameWrapper.players, function(player){
     player.update();
   });
 };
 
   // On render
 PillowFight.Play.prototype.render = function () {
-    return "cats";
+  _.each(this.gameWrapper.players, function(player){
+    player.render();
+  });
 };

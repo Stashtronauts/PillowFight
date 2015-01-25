@@ -2,11 +2,15 @@
  * Created by Memoria on 1/24/15.
  */
 var PillowFight = PillowFight || {};
+var Game = PillowFight.Game || {};
 
-PillowFight.PlayerInputController = function(){
+Game.PlayerInputController = function(gameWrapper){
+  this.gameWrapper = gameWrapper;
+  this.game = this.gameWrapper.phaserGame || {};
 
+  return this;
 };
 
-PillowFight.PlayerInputController.prototype.update = function(){
-    //console.log("input controller is updating!");
+Game.PlayerInputController.prototype.update = function(){
+
 };

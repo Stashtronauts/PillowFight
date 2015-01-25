@@ -3,9 +3,9 @@
  */
 var PillowFight = PillowFight || {};
 PillowFight.Game=PillowFight.Game ||{};
-var Asset = PillowFight.Game.Scene.Asset = function(game){
-  this.game = game;
-}
+/*var Asset = PillowFight.Game.Scene.Asset = function(game){
+ this.game = game;
+ }
 
-Asset.prototype.load=function(){};
-Asset.prototype.render=function(x,y){};
+ Asset.prototype.load=function(){};
+ Asset.prototype.render=function(x,y){};*/

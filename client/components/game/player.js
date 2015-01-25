@@ -2,54 +2,65 @@
 * Created by wfallows on 1/23/15.
 */
 var PillowFight = PillowFight || {};
-PillowFight.Game = PillowFight.Game ||{};
+var Game = PillowFight.Game ||{};
 
-PillowFight.Game.Player = function(game){
-  this.game = game;
+Game.Player = function(gameWrapper){
+  this.gameWrapper = gameWrapper || {};
+  this.game = this.gameWrapper.phaserGame || {};
+
   this.id = 0;
   this.items = [];
   this.name = "";
   this.effects = [];
   this.inputController = {};
 
-  this.initialize();
+  this.isAlive = true;
+
+  this.inputController = new Game.PlayerInputController(this.gameWrapper);
   return this;
 };
 
-PillowFight.Player.prototype.initialize = function(){
-    this.inputController = new PillowFight.PlayerInputController();
-    this.sprite = new Phaser.Sprite(this.phaserRef, 0, 0, "player");
-    this.sprite.anchor.setTo(0.5, 0.5);
-};
-
-PillowFight.Player.prototype.addItem = function(itemToAdd){
+Game.Player.prototype.addItem = function(itemToAdd){
     if (this.items.indexOf(itemToAdd) == -1) {
       this.items.push(itemToAdd);
     }
 };
 
-PillowFight.Player.prototype.addEffect = function (effectToAdd) {
+Game.Player.prototype.addEffect = function (effectToAdd) {
     if (this.effects.indexOf(effectToAdd) == -1) {
       this.effects.push(effectToAdd);
     }
 };
 
-PillowFight.Player.prototype.removeItem = function(itemToRemove) {
+Game.Player.prototype.removeItem = function(itemToRemove) {
     if (this.effects.indexOf(itemToRemove) != -1) {
       this.effects.splice(index, 1);
     }
 };
 
-PillowFight.Player.prototype.removeEffect =  function (removedEffect) {
+Game.Player.prototype.removeEffect =  function (removedEffect) {
     if (this.effects.indexOf(removedEffect) != -1) {
       this.effects.splice(index, 1);
     }
 };
 
-PillowFight.Player.prototype.preload = function(){
-    this.phaserRef.load.image('player', 'assets/cat.png')
+Game.Player.prototype.preload = function(){
+  this.game.load.image('player', '/assets/images/corgi.png');
 };
 
-PillowFight.Player.prototype.update = function(){
+Game.Player.prototype.create = function(){
+    this.sprite = this.game.add.sprite(0, 0, 'player');
+    this.sprite.anchor.setTo(0.5, 0.5);
+};
+
+Game.Player.prototype.update = function(){
     this.inputController.update();
+};
+
+Game.Player.prototype.render = function(){
+
+};
+
+Game.Player.prototype.die = function(){
+  this.isAlive = false;
 };

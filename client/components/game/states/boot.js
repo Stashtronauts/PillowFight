@@ -20,7 +20,6 @@ PillowFight.Boot.prototype.preload = function() {
     this.teamText = this.game.add.text(this.gameWrapper.width/2, this.gameWrapper.height/2,
                                         'Stashtronaut Studios', { font: "20px Arial", fill: "#ffffff",
                                         align: "center" });
-    this.teamText.anchor.setTo(0.5, 0.5);
 };
 
 PillowFight.Boot.prototype.update = function() {

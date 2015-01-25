@@ -15,7 +15,7 @@ PillowFight.Play.prototype.preload = function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Initialize player
-    this.gameWrapper.AddPlayer(new PillowFight.Game.Player(this.gameWrapper));
+    this.gameWrapper.AddPlayer(new Game.Player(this.gameWrapper));
 
     _.each(this.gameWrapper.players, function(player){
       player.preload();

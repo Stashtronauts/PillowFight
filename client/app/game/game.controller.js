@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('pillowfightApp')
-  .controller('GameCtrl', function ($scope,pfGame) {
+  .controller('GameCtrl', function ($scope,pfGame,$http,$stateParams) {
     $scope.message = 'Hello';
     $scope.gameId = 'PillowFight';
-    $scope.game = pfGame;
+    $http.get('/api/game/'+$stateParams.id).then(function(results){
+      $scope.game = pfGame;
+      $scope.gameModel = results.data;
+    })
   });

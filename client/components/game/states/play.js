@@ -5,6 +5,8 @@ var PillowFight = PillowFight || {};
 
 PillowFight.Play = function(gameWrapper){
   this.gameWrapper = gameWrapper || {};
+  this.items = [{}];
+
   return this;
 };
 
@@ -26,11 +28,16 @@ PillowFight.Play.prototype.create = function () {
   _.each(this.gameWrapper.players, function(player){
     player.create();
   });
+
+  this.spawnItems();
 };
 
   // Main game loop
 PillowFight.Play.prototype.update = function () {
+  var game = this.game;
+
   _.each(this.gameWrapper.players, function(player){
+    game.physics.arcade.collide(player, this.items, this.collectItem, null, this);
     player.update();
   });
 };
@@ -40,4 +47,18 @@ PillowFight.Play.prototype.render = function () {
   _.each(this.gameWrapper.players, function(player){
     player.render();
   });
+};
+
+PillowFight.Play.prototype.collectItem = function(player, itemCollected){
+  if(player.addItem(itemCollected)){
+    // If the player already has the item, they shouldn't be able to collect it again
+    if(this.items.indexOf(itemCollected) != -1){
+      itemCollected.destroy();
+      this.items.splice(this.items.indexOf(itemCollected), 1);
+    }
+  }
+};
+
+PillowFight.Play.prototype.spawnItems = function(){
+
 };

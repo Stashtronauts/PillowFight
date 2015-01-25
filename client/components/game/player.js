@@ -12,9 +12,6 @@ Game.Player = function(gameWrapper){
   this.items = [];
   this.name = "";
   this.effects = [{}];
-  this.inputController = {};
-
-  this.inputController = new Game.PlayerInputController(this.gameWrapper);
   this.setupKeys();
   return this;
 };
@@ -31,8 +28,11 @@ Game.Player.prototype.setupKeys = function(){
 
 Game.Player.prototype.addItem = function(itemToAdd){
     if (this.items.indexOf(itemToAdd) == -1) {
-      this.items.push(itemToAdd);
+      return false;
     }
+
+    this.items.push(itemToAdd);
+    return true;
 };
 
 Game.Player.prototype.addEffect = function (effectToAdd) {

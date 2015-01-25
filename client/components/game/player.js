@@ -6,7 +6,7 @@ var Game = PillowFight.Game ||{};
 
 Game.Player = function(gameWrapper){
   this.gameWrapper = gameWrapper || {};
-  this.phRef = this.gameWrapper.phaserGame || {};
+  this.phGame = this.gameWrapper.phaserGame || {};
 
   this.id = 0;
   this.items = [];
@@ -14,7 +14,7 @@ Game.Player = function(gameWrapper){
   this.effects = [];
   this.inputController = {};
 
-  this.inputController = new PillowFight.Game.PlayerInputController();
+  this.inputController = new Game.PlayerInputController();
   return this;
 };
 
@@ -43,8 +43,13 @@ Game.Player.prototype.removeEffect =  function (removedEffect) {
 };
 
 Game.Player.prototype.preload = function(){
-    //this.sprite.anchor.setTo(0.5, 0.5);
+    this.phGame.load.image('player', '/assets/images/corgi.jpg');
 
+};
+
+Game.Player.prototype.create = function(){
+    this.sprite = this.phGame.add.sprite(0, 0, 'player');
+    this.sprite.anchor.setTo(0.5, 0.5);
 };
 
 Game.Player.prototype.update = function(){

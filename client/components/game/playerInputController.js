@@ -6,6 +6,7 @@ var Game = PillowFight.Game || {};
 
 Game.PlayerInputController = function(){
 
+  return this;
 };
 
 Game.PlayerInputController.prototype.update = function(){

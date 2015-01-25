@@ -26,21 +26,24 @@ exports.register = function(socket) {
   });
 
   socket.on('joinLobby', function(data) {
-
+    socket.join(data.lobbyName);
   });
 
   socket.on('leaveLobby', function(data) {
-
+    socket.leave(data.lobbyName);
   });
 
   socket.on('startLobby', function(data) {
-
+    // * pass data to game initialize
+    // * send promise or game id or whatever back 
+    // to players (then players will transfer 
+    socket.leave(data.lobbyName);
   });
 
   socket.on('chatToServer', function(data) {
-    socket.emit('chatToClient', function(data) {
+    socket.to(data.lobbyName).emit(data.message);
+    
 
-    });
   });
 
 

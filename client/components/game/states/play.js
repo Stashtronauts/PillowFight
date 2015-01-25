@@ -5,16 +5,14 @@ var PillowFight = PillowFight || {};
 
 PillowFight.Play = function(gameWrapper){
   this.gameWrapper = gameWrapper || {};
-  this.phRef = this.gameWrapper.phaserGame || {};
-
   return this;
 };
 
 PillowFight.Play.prototype.preload = function () {
-    this.phRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.game.add.text(this.gameWrapper.width/2, this.gameWrapper.height/2, 'I am a platypus. FEAR MY BILL', { font: "20px Arial", fill: "#ffffff", align: "center" });
 
     // Init physics
-    this.phRef.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Initialize player
     this.gameWrapper.AddPlayer(new PillowFight.Game.Player(this.gameWrapper));
@@ -25,7 +23,9 @@ PillowFight.Play.prototype.preload = function () {
 };
 
 PillowFight.Play.prototype.create = function () {
-
+  _.each(this.gameWrapper.players, function(player){
+    player.create();
+  });
 };
 
   // Main game loop

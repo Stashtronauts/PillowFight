@@ -16,7 +16,7 @@ Game.Player = function(gameWrapper){
 
   this.isAlive = true;
 
-  this.inputController = new Game.PlayerInputController();
+  this.inputController = new Game.PlayerInputController(this.gameWrapper);
   return this;
 };
 
@@ -45,14 +45,12 @@ Game.Player.prototype.removeEffect =  function (removedEffect) {
 };
 
 Game.Player.prototype.preload = function(){
-  this.game.load.image('player', '/client/assets/images/cat.png');
+  this.game.load.image('player', '/assets/images/corgi.png');
 };
 
 Game.Player.prototype.create = function(){
     this.sprite = this.game.add.sprite(0, 0, 'player');
     this.sprite.anchor.setTo(0.5, 0.5);
-
-    this.game.camera.follow(this);
 };
 
 Game.Player.prototype.update = function(){

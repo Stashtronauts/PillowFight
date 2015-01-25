@@ -5,14 +5,14 @@ var PillowFight = PillowFight || {};
 
 PillowFight.GameState = { INACTIVE: 0, READY: 1, ACTIVE: 2, PAUSED: 3, COMPLETE: 4};
 
-PillowFight.Game = function(gameWidth, gameHeight, container){
+PillowFight.Game = function(gameWidth, gameHeight, container,model){
   // Constants
   var DEFAULT_GAME_WIDTH = 800;
   var DEFAULT_GAME_HEIGHT = 600;
 
   this.width = gameWidth || DEFAULT_GAME_WIDTH;
   this.height = gameHeight || DEFAULT_GAME_HEIGHT;
-
+  this.gameModel = model;
   this.phaserGame = new Phaser.Game(this.width, this.height, Phaser.AUTO, container);
 
   // Add states

@@ -7,10 +7,10 @@
 var Lobby = require('./lobby.model.js');
 var dal = require('./lobby.dal.js');
 exports.register = function(socket) {
-  PfLobby.schema.post('save', function (doc) {
+  Lobby.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  PfLobby.schema.post('remove', function (doc) {
+  Lobby.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
   
@@ -49,11 +49,11 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('pfLobby:save', doc);
+  socket.emit('Lobby:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('pfLobby:remove', doc);
+  socket.emit('Lobby:remove', doc);
 }
 
 // Receive Chat Message

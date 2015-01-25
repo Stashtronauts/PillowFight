@@ -3,30 +3,31 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Boot = function(game){
+PillowFight.Boot = function(gameWrapper){
   this.teamText = "";
-  this.game = game;
+  this.gameWrapper = gameWrapper || {};
+  this.phRef = this.gameWrapper.phaserGame || {};
+
   return this;
 };
 
 PillowFight.Boot.prototype.create = function() {
-    this.phaserRef.stage.backgroundColor = '#D46A6A';
+    this.phRef.stage.backgroundColor = '#D46A6A';
 
     //scaling options
-    this.phaserRef.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.phRef.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     //have the game centered horizontally
-    this.phaserRef.scale.pageAlignHorizontally = true;
-    this.phaserRef.scale.pageAlignVertically = true;
+    this.phRef.scale.pageAlignHorizontally = true;
+    this.phRef.scale.pageAlignVertically = true;
 
     //screen size will be set automatically
-    this.phaserRef.scale.setScreenSize(true);
-    this.phaserRef.time.events.add(3000, this.onEndBoot, this);
+    this.phRef.scale.setScreenSize(true);
+    this.phRef.time.events.add(3000, this.onEndBoot, this);
 };
 
 PillowFight.Boot.prototype.preload = function() {
-    this.phaserRef = PillowFight.Game.Current || {};
-    this.teamText = this.phaserRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2,
+    this.teamText = this.phRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2,
                                         'Stashtronaut Studios', { font: "20px Arial", fill: "#ffffff",
                                         align: "center" });
     this.teamText.anchor.setTo(0.5, 0.5);
@@ -41,5 +42,5 @@ PillowFight.Boot.prototype.render = function() {
 };
 
 PillowFight.Boot.prototype.onEndBoot = function() {
-    this.phaserRef.state.start("Play");
+    this.phRef.state.start("Play");
 };

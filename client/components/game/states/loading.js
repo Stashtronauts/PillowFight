@@ -3,17 +3,20 @@
  */
 var PillowFight = PillowFight || {};
 
-PillowFight.Loading = function(){
+PillowFight.Loading = function(gameWrapper){
+  this.gameWrapper = gameWrapper || {};
+  this.phRef = this.gameWrapper.phaserGame || {};
+
+  return this;
 };
 
 PillowFight.Loading.prototype.preload = function () {
-    this.phaserRef = PillowFight.Game.Current || {};
-    this.phaserRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2, 'I am a loading screen.', { font: "20px Arial", fill: "#ffffff", align: "center" });
+    this.phRef.add.text(PillowFight.Game.Width/2, PillowFight.Game.Height/2, 'I am a loading screen.', { font: "20px Arial", fill: "#ffffff", align: "center" });
 
 };
 
 PillowFight.Loading.prototype.create = function () {
-    this.phaserRef.state.start("Play");
+    this.phRef.state.start("Play");
 };
 
   // Main game loop

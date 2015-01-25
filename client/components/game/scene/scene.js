@@ -3,11 +3,11 @@
  */
 var PillowFight = PillowFight || {};
   PillowFight.Game=PillowFight.Game ||{};
-var Scene = PillowFight.Game.Scene = function(game,model){
+/*var Scene = PillowFight.Game.Scene = function(game,model){
   this.game = game;
   this.model = model;
   this.assets = [{}]
   return this;
-};
+};*/
 
 
